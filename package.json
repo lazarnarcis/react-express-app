@@ -1,0 +1,21 @@
+{
+  "name": "express-server",
+  "version": "1.0.0",
+  "description": "This is my first app.",
+  "main": "server.js",
+  "scripts": {
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
