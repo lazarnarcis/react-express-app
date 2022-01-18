@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route
+} from 'react-router-dom';
+
+import Home from "./components/home";
+import About from "./components/about";
+import Projects from "./components/projects";
 
 export default function App() {
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        fetch(`/api/notifications`)
-        .then(res => res.json())
-        .then(res => setData(res))
-        .catch(err => console.error(err));
-    }, []);
-
     return (
-        <div>
-            {
-                data.map((item, key) => {
-                    return <div key={key}>
-                        {item.id}
-                    </div>
-                })
-            }
-        </div>
+        <Router>
+            <Routes>
+                <Route exact path='/' element={<Home />}></Route>
+                <Route exact path='/about' element={<About />}></Route>
+                <Route exact path='/projects' element={<Projects />}></Route>
+            </Routes>
+        </Router>
     )
 }
