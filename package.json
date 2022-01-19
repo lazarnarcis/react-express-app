@@ -4,9 +4,9 @@
   "description": "This is my first app.",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"nodemon server\" \"npm run client\""
   },
   "author": "",
   "license": "MIT",

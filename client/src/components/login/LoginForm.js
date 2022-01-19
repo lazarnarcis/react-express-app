@@ -16,10 +16,6 @@ export default function LoginForm() {
 
         axios.post("/login", user_data)
             .catch(err => console.error(err));
-
-        axios.post("/login").then(({data}) => {
-            console.log(data);
-        })
     }
 
     return (

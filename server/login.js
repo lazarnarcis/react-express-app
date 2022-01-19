@@ -6,7 +6,7 @@ LoginRouter.post("/", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    database.query(`SELECT * FROM users WHERE username='${username}' AND password='${password}'`, (err, results) => {
+    database.query(`SELECT * FROM users WHERE username='${username}'`, (err, results) => {
         if (err)
             throw err;
         const name_from_db = results[0].username;
@@ -14,6 +14,8 @@ LoginRouter.post("/", (req, res) => {
 
         if (name_from_db == username && password_from_db == password) {
             console.log("done");
+        } else {
+            console.log("conectare esuata!");
         }
     });
 });
