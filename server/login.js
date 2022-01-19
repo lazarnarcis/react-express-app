@@ -6,16 +6,18 @@ LoginRouter.post("/", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    database.query(`SELECT * FROM users WHERE username='${username}'`, (err, results) => {
+    database.query(`SELECT * FROM users WHERE username='${username}'`, (err, result) => {
         if (err)
             throw err;
-        const name_from_db = results[0].username;
-        const password_from_db = results[0].password;
-
-        if (name_from_db == username && password_from_db == password) {
-            console.log("done");
+        if (result.length == 0) {
+            res.send({ message: "User does not exist in the database!" });
         } else {
-            console.log("conectare esuata!");
+            if (result[0].password == password) {
+                res.send({ message: "Login successful!" });
+                database.end();
+            } else {
+                res.send({ message: "The password is wrong!" });
+            }
         }
     });
 });

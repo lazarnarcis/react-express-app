@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 
 export default function RegisterForm() {
     const username = useRef();
     const email = useRef();
     const password = useRef();
+    const [message, setMessage] = useState(null);
 
     const createAccount = (e) => {
         e.preventDefault();
@@ -13,13 +14,13 @@ export default function RegisterForm() {
         const new_password = password.current.value;
 
         if (new_username === "") {
-            alert("Please enter a username!");
+            setMessage("Please enter a username!");
             return;
         } else if (new_email === "") {
-            alert("Please enter an email!");
+            setMessage("Please enter an email!");
             return;
         } else if (new_password === "") {
-            alert("Please enter a password!");
+            setMessage("Please enter a password!");
             return;
         }
         
@@ -30,16 +31,26 @@ export default function RegisterForm() {
         }
         
         axios.post('/register', user_data)
+            .then(res => setMessage(res.data.message))
             .catch(err => console.error(err));
     }
 
     return (
         <>
             <form onSubmit={createAccount}>
-                <input type="text" placeholder="Username" ref={username} />
-                <input type="email" placeholder="Email" ref={email} />
-                <input type="password" placeholder="Password" ref={password} />
-                <input type="submit" value="Create Account" />
+                <div>
+                    <input type="text" placeholder="Username" ref={username} />
+                </div>
+                <div>
+                    <input type="email" placeholder="Email" ref={email} />
+                </div>
+                <div>
+                    <input type="password" placeholder="Password" ref={password} />
+                </div>
+                <p>{message}</p>
+                <div>
+                    <input type="submit" value="Create Account" />
+                </div>
             </form>
         </>
     )
