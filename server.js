@@ -9,5 +9,5 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 
 app.listen(port, () => {
-    console.log(`Server start at ${port}`);
+    console.log(`Server start at ${port}!`);
 });
