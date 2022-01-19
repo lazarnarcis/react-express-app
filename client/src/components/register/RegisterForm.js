@@ -6,11 +6,23 @@ export default function RegisterForm() {
     const email = useRef();
     const password = useRef();
 
-    const createAccount = () => {
+    const createAccount = (e) => {
+        e.preventDefault();
         const new_username = username.current.value;
         const new_email = email.current.value;
         const new_password = password.current.value;
 
+        if (new_username === "") {
+            alert("Please enter a username!");
+            return;
+        } else if (new_email === "") {
+            alert("Please enter an email!");
+            return;
+        } else if (new_password === "") {
+            alert("Please enter a password!");
+            return;
+        }
+        
         const user_data = {
             username: new_username,
             email: new_email,

@@ -5,7 +5,8 @@ export default function LoginForm() {
     const username = useRef();
     const password = useRef();
 
-    const login = () => {
+    const login = (e) => {
+        e.preventDefault();
         const new_username = username.current.value;
         const new_password = password.current.value;
 

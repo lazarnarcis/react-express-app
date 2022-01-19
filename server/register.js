@@ -12,6 +12,7 @@ RegisterRouter.post("/", (req, res) => {
             throw err;
         console.log("1 row inserted!");
     });
+    database.end();
 });
 
 module.exports = RegisterRouter;
