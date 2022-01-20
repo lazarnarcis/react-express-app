@@ -1,14 +1,11 @@
 const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
-const cors = require("cors");
 const port = 3001;
 
-// APIs
-const registerAPI = require("./server/register.js");
-const loginAPI = require("./server/login.js");
+const registerAPI = require("./register.js");
+const loginAPI = require("./login.js");
 
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

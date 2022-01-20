@@ -6,6 +6,8 @@ const connection = mysql.createConnection({
     user: "root",
     database: "test-app"
 });
-connection.connect();
+connection.connect((err) => {
+    if (err) throw err;
+});
 
 module.exports = connection;
