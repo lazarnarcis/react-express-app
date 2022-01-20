@@ -15,7 +15,7 @@ RegisterRouter.post("/", (req, res) => {
                 if (result.length == 0) {
                     database.query(`INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${password}')`, (err, result) => {
                         if (err) throw err;
-                        res.json({ message: "The user has been entered into the database!" });
+                        res.json({ message: "The user has been entered into the database!", redirect: true });
                         database.end();
                     });
                 } else {

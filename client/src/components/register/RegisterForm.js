@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 export default function RegisterForm() {
@@ -6,6 +6,18 @@ export default function RegisterForm() {
     const email = useRef();
     const password = useRef();
     const [message, setMessage] = useState(null);
+    const [link, setLink] = useState();
+
+    const isFirstRun = useRef(true);
+    useEffect (() => {
+      if (isFirstRun.current) {
+        isFirstRun.current = false;
+        return;
+      }
+  
+      console.log("redirected");
+      window.location = "/login";
+    }, [link]);
 
     const createAccount = (e) => {
         e.preventDefault();
@@ -31,7 +43,10 @@ export default function RegisterForm() {
         }
         
         axios.post('/register', user_data)
-            .then(res => setMessage(res.data.message))
+            .then(res => {
+                setMessage(res.data.message)
+                setLink(res.data.redirect)
+            })
             .catch(err => console.error(err));
     }
 
