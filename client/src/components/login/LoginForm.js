@@ -1,10 +1,35 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 export default function LoginForm() {
     const [message, setMessage] = useState(null);
     const username = useRef();
     const password = useRef();
+    const [userData, setUserData] = useState();
+
+    useEffect(() => {
+        if (localStorage.getItem('logged')) {
+            window.location.href = '/';
+        }
+    });
+
+    const isFirstRun = useRef(true);
+    useEffect(() => {
+        if (isFirstRun.current) {
+            isFirstRun.current = false;
+            return;
+        }
+
+        localStorage.setItem('username', userData.username);
+        localStorage.setItem('email', userData.email);
+        localStorage.setItem('logged', userData.logged); 
+        if (userData.redirect) {
+            console.log("redirecting to main page");
+            setTimeout(() => {
+                window.location.href = userData.redirect;
+            }, 1500);
+        }  
+    }, [userData]);
 
     const login = (e) => {
         e.preventDefault();
@@ -25,7 +50,10 @@ export default function LoginForm() {
         }
 
         axios.post("/login", user_data)
-            .then(res => setMessage(res.data.message))
+            .then(res => {
+                setMessage(res.data.message)
+                setUserData(res.data.userdata)
+            })
             .catch(err => console.error(err));
     }
 
