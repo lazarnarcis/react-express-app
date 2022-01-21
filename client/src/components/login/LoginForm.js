@@ -7,12 +7,6 @@ export default function LoginForm() {
     const password = useRef();
     const [userData, setUserData] = useState();
 
-    useEffect(() => {
-        if (localStorage.getItem('logged')) {
-            window.location.href = '/';
-        }
-    });
-
     const isFirstRun = useRef(true);
     useEffect(() => {
         if (isFirstRun.current) {
