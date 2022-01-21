@@ -14,7 +14,6 @@ LoginRouter.post("/", (req, res) => {
         } else {
             if (result[0].password == password) {
                 res.send({ message: "Login successful!" });
-                database.end();
             } else {
                 res.send({ message: "The password is wrong!" });
             }
