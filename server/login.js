@@ -6,7 +6,7 @@ LoginRouter.post("/", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    database.query(`SELECT * FROM users WHERE username='${username}'`, (err, result) => {
+    database.query(`SELECT * FROM users WHERE username=?`, [username], (err, result) => {
         if (err)
             throw err;
         if (result.length == 0) {

@@ -7,13 +7,13 @@ RegisterRouter.post("/", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    database.query(`SELECT * FROM users WHERE username='${username}'`, (err, result) => {
+    database.query(`SELECT * FROM users WHERE username=?`, [username], (err, result) => {
         if (err) throw err;
         if (result.length == 0) {
-            database.query(`SELECT * FROM users WHERE email='${email}'`, (err, result) => {
+            database.query(`SELECT * FROM users WHERE email=?`, [email], (err, result) => {
                 if (err) throw err;
                 if (result.length == 0) {
-                    database.query(`INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${password}')`, (err, result) => {
+                    database.query(`INSERT INTO users (username, email, password) VALUES (?, ?, ?)`, [username, email, password], (err, result) => {
                         if (err) throw err;
                         res.json({ message: "The user has been entered into the database!", redirect: "/login" });
                         database.end();
@@ -26,7 +26,6 @@ RegisterRouter.post("/", (req, res) => {
             res.json({ message: "The user already exists in the database!" });
         }
     });
-    res.send();
 });
 
 module.exports = RegisterRouter;
