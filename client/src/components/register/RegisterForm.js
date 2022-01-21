@@ -16,7 +16,9 @@ export default function RegisterForm() {
       }
   
       console.log("redirected");
-      window.location = "/login";
+      setTimeout(() => {
+        window.location.href = link;
+      }, 1500);
     }, [link]);
 
     const createAccount = (e) => {

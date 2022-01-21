@@ -15,7 +15,7 @@ RegisterRouter.post("/", (req, res) => {
                 if (result.length == 0) {
                     database.query(`INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${password}')`, (err, result) => {
                         if (err) throw err;
-                        res.json({ message: "The user has been entered into the database!", redirect: true });
+                        res.json({ message: "The user has been entered into the database!", redirect: "/login" });
                         database.end();
                     });
                 } else {
@@ -26,6 +26,7 @@ RegisterRouter.post("/", (req, res) => {
             res.json({ message: "The user already exists in the database!" });
         }
     });
+    res.send();
 });
 
 module.exports = RegisterRouter;
