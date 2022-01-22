@@ -16,13 +16,16 @@ RegisterRouter.post("/", (req, res) => {
                     database.query(`INSERT INTO users (username, email, password) VALUES (?, ?, ?)`, [username, email, password], (err, result) => {
                         if (err) throw err;
                         res.json({ message: "The user has been entered into the database!", redirect: "/login" });
-                    });
+                        res.end();
+                });
                 } else {
                     res.json({ message: "That email address is already in use!" });
+                    res.end();
                 }
             });
         } else {
             res.json({ message: "The user already exists in the database!" });
+            res.end();
         }
     });
 });

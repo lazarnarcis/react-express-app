@@ -10,6 +10,7 @@ LoginRouter.post("/", (req, res) => {
         if (err) throw err;
         if (result.length == 0) {
             res.json({ message: "User does not exist in the database!", redirect: false });
+            res.end();
         } else {
             if (result[0].password == password) {
                 session = req.session;
@@ -23,8 +24,10 @@ LoginRouter.post("/", (req, res) => {
                     redirect: "/" 
                 };
                 res.json({ message: "Login successful!", userdata: userdata });
+                res.end();
             } else {
                 res.json({ message: "The password is wrong!", redirect: false });
+                res.end();
             }
         }
     });
