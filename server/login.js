@@ -21,7 +21,7 @@ LoginRouter.post("/", (req, res) => {
                     username: session.username,
                     logged: session.logged,
                     email: session.email,
-                    redirect: "/" 
+                    redirect: "/"
                 };
                 res.json({ message: "Login successful!", userdata: userdata });
                 res.end();
